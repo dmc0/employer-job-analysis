@@ -1,2 +1,6 @@
 
 *.csv
+*.stats
+*.xlsx
+__pycache__/emp_job_analysis.cpython-37.pyc
+__pycache__/emp_job_analysis.cpython-38.pyc
