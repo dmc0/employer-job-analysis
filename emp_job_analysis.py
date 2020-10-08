@@ -15,6 +15,7 @@ this = sys.modules[__name__]
 this.word_categories = []
 this.ignore_words = []
 this.path_job_desc = Path('')
+this.job_desc_folder = ''
 
 COL_LINE_NUM = 0
 COL_WORD_NUM = 1
@@ -26,7 +27,8 @@ COL_WORD = 6
 COL_WORD_CONTEXT = 7
 
 # <codecell> functions
-def initialize(job_desc_folder, words_ignore_file, word_category_files):
+def initialize(job_desc_folder_in, words_ignore_file, word_category_files):
+    this.job_desc_folder = job_desc_folder_in
     this.path_job_desc = Path(job_desc_folder)
 
     if this.path_job_desc.exists() == False:
@@ -226,11 +228,11 @@ def process_file(lines, split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_c
               
 
 # <codecell> Process Files
-def process_files(split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_chars):
+def process_files(split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_chars, NUM_FILES_TO_PROCESS):
     df_job_desc = pd.DataFrame(columns=['job_id', 'line_num', 'word_pos', 'sort_order', 'category', 'word_lc', 'word', 'word_context'])
     df_company_position = pd.DataFrame(columns=['job_id', 'company_name', 'position'])
     
-    for job_id, fn in enumerate(this.path_job_desc.glob('*.txt'), 1):
+    for row_id, fn in enumerate(this.path_job_desc.glob('*.txt'), 1):
         try:
             file_name = str(fn)
             print(f'file_name = {file_name}')
@@ -240,7 +242,7 @@ def process_files(split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_chars):
             company_name = file_name.split('-')[0].strip()
             position = file_name.split('-')[1].strip()
         
-            df_company_position = df_company_position.append({'job_id': job_id, 'company_name' : company_name, 'position': position}, ignore_index=True)
+            df_company_position = df_company_position.append({'job_id': row_id, 'company_name' : company_name, 'position': position}, ignore_index=True)
         
             file_lines = []    
             
@@ -254,16 +256,19 @@ def process_files(split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_chars):
             for word_pos, w in enumerate(words_final):
                 if w[COL_IGNORE_WORD] != 1:
                     df_job_desc = df_job_desc.append({\
-                    'job_id': job_id, \
+                    'job_id': row_id, \
                     'line_num': w[COL_LINE_NUM], \
                     'word_pos': w[COL_WORD_NUM], \
                     'sort_order': w[COL_SORT_ORDER], \
                     'category': w[COL_CATEGORY], \
                     'word_lc': w[COL_WORD].lower(), \
                     'word': w[COL_WORD], \
-                    'word_context': w[COL_WORD_CONTEXT]}, ignore_index=True)                   
+                    'word_context': w[COL_WORD_CONTEXT]}, ignore_index=True)
+                    
+            if row_id == NUM_FILES_TO_PROCESS:
+                print(f'NUM_FILES_TO_PROCESS = {NUM_FILES_TO_PROCESS}.  File processing was abandoned.  It is possible that not all the files in the {this.job_desc_folder} folder were processed.')
+                break       
                         
-            #break
         except:
             for e in sys.exc_info():
                 print(e)

@@ -26,10 +26,12 @@ word_category_files = ['words-key.txt', 'words-softskills.txt']
 NUM_WORDS_BEFORE = 5
 NUM_WORDS_AFTER = 5
 
+# -1 = process all files.  Set it to a specific number for debugging.
+NUM_FILES_TO_PROCESS = -1
+
 remove_chars = set(string.punctuation)
 remove_chars.add('’')
 
-# split_chars_arr = ['~', '!', '@', '$', '%', '^', '&', '*', '(', ')', '_', '=', '{', '[', '}', ']', '\\', '|', ';', ':', '"', '\'', ',', '<', '.', '>', '/', '?', '’']
 split_chars_arr = ['!','&', '(', ')', '=', '{', '[', '}', ']', '|', ';', ':', '"', ',', '<', '.', '>', '?', '’']
 split_chars = str(split_chars_arr) 
 
@@ -39,7 +41,7 @@ t_start = time.perf_counter()
 
 eja.initialize(job_desc_folder, words_ignore_file, word_category_files)
 
-df_word_counts, df_jobs_sorted = eja.process_files(split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_chars)
+df_word_counts, df_jobs_sorted = eja.process_files(split_chars, NUM_WORDS_BEFORE, NUM_WORDS_AFTER, remove_chars, NUM_FILES_TO_PROCESS)
 
 t_stop = time.perf_counter()
 print(f'Elapsed time (secs) = {t_stop - t_start}')
