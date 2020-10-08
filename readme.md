@@ -31,7 +31,7 @@ Acme Products Company - Data Engineer.txt
 .....
 ### 5. If you used more than the 'words-key.txt' and 'words-softskills.txt' files for your categories, adjust the word_category_files list variable as needed.  The words-[category].txt files are purposely not discovered automatically because the order in the word_category_files list sets the priority of their sorting in the results.
 .....
-# That's it.  Now run the code, it will analyze the files and produce 2 CSV file reports in the same folder as main.py.
+# That's it.  Now run the main.py code.  It will analyze the files and produce 2 CSV file reports in the same folder as main.py.
 Report file names for job description analyses
 
 ```
