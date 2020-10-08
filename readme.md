@@ -1,7 +1,7 @@
 # Overview 
-### This Python code is designed to help create a universal resume... though it could be adapted for other purposes.  
+### This Python code is designed to help create a universal resume... though it could be adapted for other purposes.  Resumes and job descriptions often pose special problems with conflicts between 'words' you need to find and characters you need to ignore.  For example, C++, T-SQL, and C# are programming languages but characters like +, -, and # need to be removed before other words can be matched.  That is one of the problems this code solves.  It also handles looking for single character 'words', e.g., R for the R programming language.
 
-### The idea is to create a few word category text files with a file name format of words-[category].txt and use those to match against the words in a bunch of job descriptions.  You will still need to manually create a universal resume but it is dramatically easier when you have a list of the most commonly used words in the job descriptions.
+### The idea is to create a few word category text files with a file name format of words-[category].txt and use those to match against the words in a bunch of job descriptions.  You will still need to manually create a universal resume but it is dramatically easier when you have a list with counts of the most commonly used words in the job descriptions.
 
 ### NOTE: Each word (or character string really) needs to be put on its own line in the words-[category].txt files.  By doing that there is no need to escape any characters and it makes it easier to copy and paste lists of words from most applications.
 
