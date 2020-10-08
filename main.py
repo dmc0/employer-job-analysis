@@ -16,13 +16,20 @@ import string
 import emp_job_analysis as eja
 
 # <codecell> User defined variables
+
+# Folder where you have placed your job description files
+# Files need to have the format [Company Name] - [Job Title].txt
+# For example, 'Acme Products Company - Data Engineer.txt'
 job_desc_folder = 'D://data//employment//description//LinkedIn//'
 
+# Contains many commonly ignored words, e.g., 'the', 'and', 'a'
 words_ignore_file = 'words-ignore.txt'
 
 # Analysis results will also be sorted in this order
 word_category_files = ['words-key.txt', 'words-softskills.txt']
 
+# Number of words to retrieve before and after the word being sought
+# These words will be shown in the report's word_context column
 NUM_WORDS_BEFORE = 5
 NUM_WORDS_AFTER = 5
 
@@ -30,7 +37,7 @@ NUM_WORDS_AFTER = 5
 NUM_FILES_TO_PROCESS = -1
 
 remove_chars = set(string.punctuation)
-remove_chars.add('’')
+remove_chars.add('’')  # this is a special character used as an apostrophe
 
 split_chars_arr = ['!','&', '(', ')', '=', '{', '[', '}', ']', '|', ';', ':', '"', ',', '<', '.', '>', '?', '’']
 split_chars = str(split_chars_arr) 
