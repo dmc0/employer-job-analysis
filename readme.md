@@ -42,8 +42,8 @@ df_job_desc_words.csv
 
 ### First few lines of a word_counts.csv report
 
-![Word Count Report](/img/word_counts.jpg)
+![Word Count Report](img/word_counts.jpg)
 
 ### First few lines of a df_job_desc_words report
 
-![Job Description Words Report](/img/df_job_desc_words.jpg)
+![Job Description Words Report](img/df_job_desc_words.jpg)
